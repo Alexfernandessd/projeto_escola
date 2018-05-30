@@ -11,7 +11,6 @@ mongoClient.connect(process.env.MONGO_CONNECTION, function(err, conn){
   global.db = conn.db(process.env.MONGO_DB);
   //coloque todo o código antigo do www aqui dentro
 
-
 var app = require('../app');
 var debug = require('debug')('escola:server');
 var http = require('http');

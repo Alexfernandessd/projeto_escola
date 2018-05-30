@@ -4,11 +4,12 @@ var passport = require('passport');
 var router = express.Router();
 
 function authenticationMiddleware () {  
-  return function (req, res, next) {
+  return function isLoggedIn (req, res, next) {
     if (req.isAuthenticated()) {
-      return next()
+      return next();
     }
-    res.redirect('/login?fail=true')
+
+    res.redirect('/login');
   }
 }
 
@@ -20,12 +21,16 @@ router.get('/login', function(req, res){
 });
 
 router.post('/login',
-  passport.authenticate('local', { successRedirect: '/index', failureRedirect: '/login?fail=true' })
+  passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login?fail=true' })
 );
 
-router.get('/index', authenticationMiddleware (), function(req, res){
-   res.render('index', { username: req.user.username });
-});
+var alunos = require('../model/alunos');
 
+router.get('/', authenticationMiddleware (), function(req, res){
+  alunos.findAll((e, docs) => {
+      if(e) { return console.log(e); }
+      res.render('index', { title: 'Lista de Clientes', docs: docs, username: req.user.username });
+  })
+});
 
 module.exports = router;

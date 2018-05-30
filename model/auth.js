@@ -3,10 +3,10 @@ const LocalStrategy = require('passport-local').Strategy
 
 module.exports = function(passport){
 
-	    function findUser(email, callback){
-        global.db.collection("users").findOne({"email": email}, function(err, doc){
-            callback(err, doc);
-        });
+    function findUser(email, callback){
+      global.db.collection("users").findOne({"email": email}, function(err, doc){
+          callback(err, doc);
+      });
     }
     
     function findUserById(id, callback){
