@@ -12,11 +12,14 @@ function authenticationMiddleware () {
   }
 }
 
-router.get('/', authenticationMiddleware (), function(req, res, next) {
-  res.redirect('/');
-});
-
 var alunos = require('../model/alunos');
+
+router.get('/', authenticationMiddleware (), function(req, res){
+  alunos.findAll((e, docs) => {
+      if(e) { return console.log(e); }
+      res.render('alunos', { docs: docs, username: req.user.username });
+  })
+});
 
 router.get('/delete/:id', authenticationMiddleware (), function(req, res) {
   var id = req.params.id;

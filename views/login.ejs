@@ -1,18 +1,45 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>Login</title>
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+  </head>
   <body>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-      <input name="username" type="text" /><br />
-      <input name="password" type="password" /><br />
-      <input type="submit" value="Login" />
-    </form>
-    <% if(message) { %>
-      <p>
-        <label style="color:Red"><%= message %></label>
-      </p>
-    <%}%>
-    <p>
-      <a href="/users/forgot">Esqueceu sua senha?</a> | <a href="/users/signup">Não possui cadastro?</a>
-    </p>
+
+    <div class="container-fluid container-login">
+      
+      <div class="login">
+        <center>
+          <h1>Login</h1>
+
+          <form action="/login" method="POST">
+            <div class="form-group mx-sm-3 mb-2">
+
+              <input type="email" name="username" class="form-control" id="email" placeholder="Enter email"><br>
+
+              <input type="password" name="password" class="form-control" id="password" placeholder="Enter password"><br>
+    
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <a href="/users/forgot">Esqueceu sua senha?</a><br> 
+            </div>
+          </form>
+          <% if(message) { %>
+            <p>
+              <label style="color:Red"><%= message %></label>
+            </p>
+          <%}%>
+          <p>
+            <a href="/users/signup">Não possui cadastro?</a>
+          </p>
+        </center>
+      </div>
+
+    </div>
+  
   </body>
 </html>
