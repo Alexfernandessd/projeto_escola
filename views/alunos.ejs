@@ -7,6 +7,8 @@
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   </head>
   <body>
@@ -15,6 +17,8 @@
       
       <% include header.ejs %>
 
+      <div class="content">
+    
         <table class="table table-bordered">
           <thead class="thead-dark">
             <tr>
@@ -26,22 +30,61 @@
             </tr>
           </thead>
           <tbody>
-          <% docs.forEach(function(customer){ %>
+            <% docs.forEach(function(customer){ %>
 
-            <tr>
-              <th><%= customer.nome %></th>
-              <th><%= customer.email %></th> 
-              <th><%= customer.curso %></th>
-              <th>
-                <a href="/delete/<%= customer._id %>" onclick="return confirm('Tem certeza que deseja excluir?');"> X </a>
-              </th>
-              <th>Edit</th>
-            </tr>
+              <tr>
+                <th><%= customer.nome %></th>
+                <th><%= customer.email %></th> 
+                <th><%= customer.curso %></th>
+                <th>
+                  <a href="alunos/delete/<%= customer._id %>" onclick="return confirm('Tem certeza que deseja excluir?');"> X </a>
+                </th>
+                <th>Edit</th>
+              </tr>
 
-        <% }) %>
-        </tbody>
-      </table>
-    
+            <% }) %>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="modal fade" id="modalCadAluno" tabindex="-1" role="dialog" aria-labelledby="modalCadAluno" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalCadAluno">Cadastrar aluno</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form action="/alunos/new" method="POST">
+                <div class="form-group mx-sm-3 mb-2">
+
+                  <input type="text" name="nome" class="form-control" id="nome" placeholder="Name"><br>
+
+                  <input type="email" name="email" class="form-control" id="email" placeholder="Email"><br>
+
+                  <input type="text" name="curso" class="form-control" id="curso" placeholder="Curso"><br>
+        
+                  <button type="submit" class="btn btn-success">Cadastrar</button>
+                  
+                </div>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-footer">
+        <button type="button" class="btn btn-primary btn-circle btn-xl" data-toggle="modal" data-target="#modalCadAluno"> + </button>
+      </div>
+
     </div>
 
   </body>

@@ -25,8 +25,18 @@ router.get('/delete/:id', authenticationMiddleware (), function(req, res) {
   var id = req.params.id;
   alunos.deleteOne(id, (e, r) => {
         if(e) { return console.log(e); }
-        res.redirect('/');
+        res.redirect('/alunos');
       });
 });
+
+router.post('/new', function(req, res) {
+  var nome = req.body.nome;
+  var email = req.body.email;
+  var curso = req.body.curso;
+  alunos.insertAluno({nome, email, curso}, (err, result) => {
+          if(err) { return console.log(err); }
+          res.redirect('/alunos');
+      })
+})
 
 module.exports = router;

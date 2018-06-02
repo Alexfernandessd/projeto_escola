@@ -14,7 +14,12 @@ function authenticationMiddleware () {
 
 
 router.get('/', authenticationMiddleware (), function(req, res){
-  res.render('index', { username: req.user.username });
+  res.render('index', { nome: req.user.nome });
+});
+
+router.get('/logout', authenticationMiddleware (), function(req, res){
+	req.logout();
+	res.redirect('/');
 });
 
 module.exports = router;
