@@ -12,7 +12,6 @@ function authenticationMiddleware () {
   }
 }
 
-
 router.get('/', authenticationMiddleware (), function(req, res){
   res.render('index', { nome: req.user.nome });
 });

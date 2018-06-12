@@ -17,7 +17,7 @@ var alunos = require('../model/alunos');
 router.get('/', authenticationMiddleware (), function(req, res){
   alunos.findAll((e, docs) => {
       if(e) { return console.log(e); }
-      res.render('alunos', { docs: docs, username: req.user.username });
+      res.render('alunos', { docs: docs, nome: req.user.nome });
   })
 });
 
